@@ -389,6 +389,13 @@ gst_numbersink_render (GstBaseSink * sink, GstBuffer * buffer)
 
   GST_DEBUG_OBJECT (numbersink, "render");
 
+  GstMapInfo info;
+
+  if (gst_buffer_map (buffer, &info, GST_MAP_READ)) {
+      gst_util_dump_mem (info.data, info.size);
+      gst_buffer_unmap (buffer, &info);
+  }
+
   return GST_FLOW_OK;
 }
 

@@ -38,6 +38,8 @@
 #include <gst/base/gstbasesrc.h>
 #include "gstnumbersrc.h"
 
+#include <string.h>
+
 GST_DEBUG_CATEGORY_STATIC (gst_numbersrc_debug_category);
 #define GST_CAT_DEFAULT gst_numbersrc_debug_category
 
@@ -412,9 +414,26 @@ static GstFlowReturn
 gst_numbersrc_fill (GstBaseSrc * src, guint64 offset, guint size,
     GstBuffer * buf)
 {
+  static guint32 i = 0;
   GstNumbersrc *numbersrc = GST_NUMBERSRC (src);
+  GstMapInfo info;
 
   GST_DEBUG_OBJECT (numbersrc, "fill");
+
+  if (size < sizeof(i)) {
+      GST_ERROR_OBJECT(numbersrc, "gst_numbersrc_fill: size too short");
+      return GST_FLOW_ERROR;
+  }
+
+  if (!gst_buffer_map (buf, &info, GST_MAP_WRITE))
+    return GST_FLOW_ERROR;
+
+  guint8 *data = info.data;
+  memcpy(data, &i, sizeof(i));
+  i++;
+
+  gst_buffer_unmap (buf, &info);
+  gst_buffer_resize(buf, 0, sizeof(i));
 
   return GST_FLOW_OK;
 }
