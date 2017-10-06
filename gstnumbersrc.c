@@ -117,6 +117,7 @@ gst_numbersrc_class_init (GstNumbersrcClass * klass)
   gobject_class->get_property = gst_numbersrc_get_property;
   gobject_class->dispose = gst_numbersrc_dispose;
   gobject_class->finalize = gst_numbersrc_finalize;
+/*
   base_src_class->get_caps = GST_DEBUG_FUNCPTR (gst_numbersrc_get_caps);
   base_src_class->negotiate = GST_DEBUG_FUNCPTR (gst_numbersrc_negotiate);
   base_src_class->fixate = GST_DEBUG_FUNCPTR (gst_numbersrc_fixate);
@@ -137,6 +138,7 @@ gst_numbersrc_class_init (GstNumbersrcClass * klass)
   base_src_class->event = GST_DEBUG_FUNCPTR (gst_numbersrc_event);
   base_src_class->create = GST_DEBUG_FUNCPTR (gst_numbersrc_create);
   base_src_class->alloc = GST_DEBUG_FUNCPTR (gst_numbersrc_alloc);
+*/
   base_src_class->fill = GST_DEBUG_FUNCPTR (gst_numbersrc_fill);
 
 }

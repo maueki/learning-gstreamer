@@ -119,6 +119,7 @@ gst_numbersink_class_init (GstNumbersinkClass * klass)
   gobject_class->get_property = gst_numbersink_get_property;
   gobject_class->dispose = gst_numbersink_dispose;
   gobject_class->finalize = gst_numbersink_finalize;
+/*
   base_sink_class->get_caps = GST_DEBUG_FUNCPTR (gst_numbersink_get_caps);
   base_sink_class->set_caps = GST_DEBUG_FUNCPTR (gst_numbersink_set_caps);
   base_sink_class->fixate = GST_DEBUG_FUNCPTR (gst_numbersink_fixate);
@@ -138,8 +139,11 @@ gst_numbersink_class_init (GstNumbersinkClass * klass)
   base_sink_class->prepare_list =
       GST_DEBUG_FUNCPTR (gst_numbersink_prepare_list);
   base_sink_class->preroll = GST_DEBUG_FUNCPTR (gst_numbersink_preroll);
+*/
   base_sink_class->render = GST_DEBUG_FUNCPTR (gst_numbersink_render);
+/*
   base_sink_class->render_list = GST_DEBUG_FUNCPTR (gst_numbersink_render_list);
+*/
 
 }
 
