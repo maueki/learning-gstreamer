@@ -142,6 +142,7 @@ gst_twicefilter_class_init (GstTwicefilterClass * klass)
   gobject_class->get_property = gst_twicefilter_get_property;
   gobject_class->dispose = gst_twicefilter_dispose;
   gobject_class->finalize = gst_twicefilter_finalize;
+/*
   base_transform_class->transform_caps =
       GST_DEBUG_FUNCPTR (gst_twicefilter_transform_caps);
   base_transform_class->fixate_caps =
@@ -174,10 +175,11 @@ gst_twicefilter_class_init (GstTwicefilterClass * klass)
       GST_DEBUG_FUNCPTR (gst_twicefilter_transform_meta);
   base_transform_class->before_transform =
       GST_DEBUG_FUNCPTR (gst_twicefilter_before_transform);
+*/
   base_transform_class->transform =
       GST_DEBUG_FUNCPTR (gst_twicefilter_transform);
-  base_transform_class->transform_ip =
-      GST_DEBUG_FUNCPTR (gst_twicefilter_transform_ip);
+/*  base_transform_class->transform_ip =
+      GST_DEBUG_FUNCPTR (gst_twicefilter_transform_ip);*/
 
 }
 
