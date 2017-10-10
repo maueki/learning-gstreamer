@@ -4,7 +4,7 @@ CFLAGS:=-Wno-unused-function
 .SUFFIXES: .c .o .so
 .PHONY: all clean inspect
 
-all: gstnumbersink.so gstnumbersrc.so
+all: gstnumbersink.so gstnumbersrc.so gsttwicefilter.so
 
 .c.o:
 	gcc -Wall -Werror -fPIC ${CFLAGS} $(shell pkg-config --cflags gstreamer-1.0 gstreamer-base-1.0) -c $<
