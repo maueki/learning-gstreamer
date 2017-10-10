@@ -38,6 +38,8 @@
 #include <gst/base/gstbasetransform.h>
 #include "gsttwicefilter.h"
 
+#include <string.h>
+
 GST_DEBUG_CATEGORY_STATIC (gst_twicefilter_debug_category);
 #define GST_CAT_DEFAULT gst_twicefilter_debug_category
 
@@ -472,6 +474,25 @@ gst_twicefilter_transform (GstBaseTransform * trans, GstBuffer * inbuf,
   GstTwicefilter *twicefilter = GST_TWICEFILTER (trans);
 
   GST_DEBUG_OBJECT (twicefilter, "transform");
+
+  GstMapInfo iinfo;
+  if (!gst_buffer_map (inbuf, &iinfo ,GST_MAP_READ))
+      return GST_FLOW_ERROR;
+
+  guint32 i=0;
+  memcpy(&i, iinfo.data, sizeof(i));
+  gst_buffer_unmap(inbuf, &iinfo);
+
+  i*=2;
+
+  GstMapInfo oinfo;
+  if (!gst_buffer_map(outbuf, &oinfo, GST_MAP_WRITE))
+      return GST_FLOW_ERROR;
+
+  memcpy(oinfo.data, &i, sizeof(i));
+
+  gst_buffer_unmap(outbuf, &oinfo);
+  gst_buffer_resize(outbuf, 0, sizeof(i));
 
   return GST_FLOW_OK;
 }
